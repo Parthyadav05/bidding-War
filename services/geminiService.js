@@ -30,9 +30,9 @@ const generateProductsFromGemini = async (category, count) => {
     Example:
     [
       {
-        "name": "XYZ Phone",
-        "description": "Sample phone description",
-        "marketPrice": 999,
+        "name": "Mayank Doholiya",
+        "description": "Harsh Chutiya hai",
+        "marketPrice": Free,
         "category": "${category}"
       }
     ]
