@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import cyberpunkBg from "../assets/cyberpunk.jpg";
 import AuctionProduct from "../components/AuctionProduct";
 import CyberpunkButton from "../components/CyberpunkButton";
@@ -8,6 +9,9 @@ const BiddingPage = () => {
   const [showStats, setShowStats] = useState(false);
   const [finalBids, setFinalBids] = useState([]);
   const auctionRef = useRef();
+
+  const navigate = useNavigate(); // navigation hook
+  const goToLanding = () => navigate("/");
 
   const handleAuctionComplete = (bids) => {
     setFinalBids(bids);
@@ -30,10 +34,15 @@ const BiddingPage = () => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-lg z-0" />
 
+      {/* Top-right Landing Page button */}
+      <div className="absolute top-6 right-6 z-20">
+        <CyberpunkButton label="home" onClick={goToLanding} size="small" />
+      </div>
+
       {/* Character Profiles with Chat */}
       <CharacterProfiles />
 
-      {/* 3D Auction Product in center */}
+      {/* 3D Auction Product */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full pt-20">
         {!showStats && (
           <AuctionProduct
@@ -44,18 +53,16 @@ const BiddingPage = () => {
         )}
       </div>
 
-      {/* PASS Button */}
+      {/* PASS and BID Buttons */}
       {!showStats && (
-        <div className="absolute bottom-10 left-6 z-20">
-          <CyberpunkButton label="PASS" onClick={handlePass} />
-        </div>
-      )}
-
-      {/* BID Button */}
-      {!showStats && (
-        <div className="absolute bottom-10 right-6 z-20">
-          <CyberpunkButton label="BID" onClick={handleBid} />
-        </div>
+        <>
+          <div className="absolute bottom-10 left-6 z-20">
+            <CyberpunkButton label="PASS" onClick={handlePass} />
+          </div>
+          <div className="absolute bottom-10 right-6 z-20">
+            <CyberpunkButton label="BID" onClick={handleBid} />
+          </div>
+        </>
       )}
 
       {/* Final Stats Modal */}
